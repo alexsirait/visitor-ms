@@ -8,13 +8,15 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import HeaderVisitor from '../components/HeaderVisitor';
 import ButtonHome from '../components/ButtonHome';
+import Link from 'next/link';
+import { HiDesktopComputer } from 'react-icons/hi';
 
 const prisma = new PrismaClient();
 
 const getVisitors = async () => {
 	const res = await prisma.visitor.findMany({
 		where: {
-			type_visitor: 'Client/Investor/Customer',
+			type_visitor: 'Supplier',
 		},
 	});
 	return res;
@@ -29,8 +31,11 @@ export default async function Visitor() {
 			<HeaderVisitor />
 			<div className="box">
 				<div className="mb-4">
-					<AddVisitor />
-					<ButtonHome />
+					{/* <AddVisitor /> */}
+					<Link href={'/admin'} className="button is-link">
+						<HiDesktopComputer />
+						<span className="ml-2">Home</span>
+					</Link>
 					{!session ? <ButtonSignIn /> : <ButtonSignOut />}
 				</div>
 				<table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">

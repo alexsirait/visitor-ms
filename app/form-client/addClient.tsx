@@ -37,11 +37,23 @@ export default function AddClient() {
 		setCompanyName('');
 		setPurposeOfVisit('');
 		setModal(false);
+		router.push('admin-client');
 		router.refresh();
 		toast.success('Successfully submitted ..');
 	};
 	return (
 		<>
+			<div className="field mb-5">
+				<div className="control mb-2">
+					<label className="label">Time out ? 🤔</label>
+					<Link
+						href={'/search-client'}
+						className="button is-warning has-text-weight-bold"
+					>
+						Search Visitor/Guest
+					</Link>
+				</div>
+			</div>
 			<div className="content has-text-centered">
 				<h2>Visitor/Guest</h2>
 			</div>

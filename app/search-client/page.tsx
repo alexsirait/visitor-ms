@@ -8,16 +8,20 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import HeaderVisitor from '../components/HeaderVisitor';
 import ButtonHome from '../components/ButtonHome';
-import MainSearch from './mainSearch';
+import MainSearch from '../search-visitor/mainSearch';
 
 const prisma = new PrismaClient();
 
 const getVisitors = async () => {
-	const res = await prisma.visitor.findMany();
+	const res = await prisma.visitor.findMany({
+		where: {
+			type_visitor: 'Client/Investor/Customer',
+		},
+	});
 	return res;
 };
 
-export default async function MainPage() {
+export default async function Visitor() {
 	const [visitors] = await Promise.all([getVisitors()]);
 	const session = await getServerSession(authOptions);
 
@@ -30,7 +34,6 @@ export default async function MainPage() {
 					<ButtonHome />
 					{!session ? <ButtonSignIn /> : <ButtonSignOut />}
 				</div>
-
 				<MainSearch visitors={visitors} session={session} />
 			</div>
 		</>

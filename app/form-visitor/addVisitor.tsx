@@ -38,10 +38,22 @@ export default function AddVisitor() {
 		setCompanyName('');
 		setModal(false);
 		router.refresh();
+		router.push('admin-visitors');
 		toast.success('Successfully submitted ..');
 	};
 	return (
 		<>
+			<div className="field mb-5">
+				<div className="control mb-2">
+					<label className="label">Time out ? 🤔</label>
+					<Link
+						href={'/search-visitors'}
+						className="button is-warning has-text-weight-bold"
+					>
+						Search Visitor/Guest
+					</Link>
+				</div>
+			</div>
 			<div className="content has-text-centered">
 				<h2>Visitor/Guest</h2>
 			</div>
